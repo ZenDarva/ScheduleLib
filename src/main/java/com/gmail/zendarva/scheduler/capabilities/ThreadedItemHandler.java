@@ -36,7 +36,8 @@ public class ThreadedItemHandler implements IItemHandler {
         ItemStack targStack = inventory.get(slot);
         int amountFree = targStack.getMaxStackSize()-targStack.getCount();
         int amountToAdd = Math.min(amountFree, stack.getCount());
-        targStack.grow(amountToAdd);
+        if (!simulate)
+            targStack.grow(amountToAdd);
         ItemStack copy = stack.copy();
         copy.shrink(amountToAdd);
         return copy;
@@ -45,11 +46,19 @@ public class ThreadedItemHandler implements IItemHandler {
     @Nonnull
     @Override
     public synchronized ItemStack extractItem(int slot, int amount, boolean simulate) {
-        return null;
+        ItemStack stack = inventory.get(slot);
+        if (stack.isEmpty()){
+            return stack;
+        }
+        ItemStack toReturn = stack.copy();
+        int returnAmount = Math.min(amount,toReturn.getCount());
+        toReturn.setCount(returnAmount);
+        stack.shrink(returnAmount);
+        return toReturn;
     }
 
     @Override
     public int getSlotLimit(int slot) {
-        return 0;
+        return this.getStackInSlot(slot).getMaxStackSize();
     }
 }
