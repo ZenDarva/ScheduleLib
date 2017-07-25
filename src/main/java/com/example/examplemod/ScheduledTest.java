@@ -14,7 +14,6 @@ import net.minecraft.util.math.BlockPos;
 public class ScheduledTest extends ScheduledTask {
 
     int count = 0;
-    IBlockState state;
 
     @Override
     public boolean isDone() {
@@ -30,10 +29,5 @@ public class ScheduledTest extends ScheduledTask {
         if (request.block != Blocks.STONE){
             twa.setBlock(continuation,target,Blocks.STONE,0);
         }
-
-        if (state == null){
-            state = twa.getBlockState(continuation,target).state;
-        }
-        System.out.println(state.getBlock().getUnlocalizedName());
     }
 }
