@@ -13,8 +13,6 @@ import net.minecraft.util.math.BlockPos;
  */
 public class ScheduledTest extends ScheduledTask {
 
-    int count = 0;
-
     @Override
     public boolean isDone() {
         return false;

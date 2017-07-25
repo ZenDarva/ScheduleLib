@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by James on 7/24/2017.
  */
-public class ThreadedItemHandler implements IItemHandler {
+public class ThreadedItemHandler implements IItemHandler, ThreadedCapability {
 
     private final int slots;
     private ArrayList<ItemStack> inventory;
